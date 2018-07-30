@@ -1,1 +1,43 @@
+<!-- For each Sales Rep, generate Year to Date, Month to Date, Quarter to
+Date, and Inception to Date summary of cash amounts <sold> across all
+funds. -->
 
+<!-- Month-to-date (MTD) is a period starting at the 
+beginning of the current month and ending at the current date. -->
+
+<!-- need to set current date -->
+
+<!-- total amount sold this year -->
+<!-- amount sold this month -->
+<!-- quarter to date - july, august, september - amount sold since beginning
+of july -->
+<!-- inception?? -->
+
+<!-- For each Sales Rep, generate a summary of the net amount held by
+investors across all funds. -->
+
+<!-- find each sales rep 
+    
+THEN find when the bought 
+
+and add up total -->
+
+var monthlySum = 0;
+var transType;
+var shares = 0;
+var price = 0;
+
+var monthToDate = function(month) {
+    if (month === "January" && transType === "sell") {
+        monthlySum += (shares * price)
+    }
+    return monthlySum;
+  };
+  
+
+describe("monthToDate", function() {
+    it("should add up only cash amounts sold in July", function() {
+      <!-- expect(monthToDate(something)).to.equal(something); -->
+        how could the expect statement account for constantly changing values?
+    });
+  
