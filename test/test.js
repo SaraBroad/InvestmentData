@@ -1,4 +1,5 @@
 var expect = require("chai").expect;
+var mocha = require("mocha");
 var Moment = require('moment');
 const MomentRange = require('moment-range');
 const moment = MomentRange.extendMoment(Moment);
@@ -32,7 +33,7 @@ function yearToDate(time, shares, price) {
     var price = 0;
     var transType;
     var amountSoldThisYear = 0;
-    var numSellTransactions;
+    var numSellTransactionsThisYear;
 
     //do while loop?
     // for (var i = 0; i < numSellTransactions; i++) {
@@ -40,9 +41,12 @@ function yearToDate(time, shares, price) {
     // }
 
     if (transType === "SELL") {
-        amountSoldThisYear += shares * price;
+        for (var i = 0; i < numSellTransactionsThisYear; i++) {
+            
+            amountSoldThisYear = shares * price;
+        }   
     }
-    return amountSold;
+    return amountSoldThisYear;
 }
 
 yearToDate();
@@ -66,9 +70,19 @@ function inceptionToDate (date, shares, price) {
     // if the dates were different, it would need to take in a variable to allow for date differentiation
     // do something via database like where: date = data.trx_date
     // more complex - allow for input to search date of inception
-
-
-
-
 }
+
+
+
+describe("TypeSell", function(){
+    it("when type is sell to multiply the transactions per broker in which funds were sold", function(){
+    expect(yearToDate(1602.1495, 9.34).to.equal(14964.07633))
+    });
+
+    it("should throw when not passed numbers", function(){
+        expect(function(){
+            yearToDate()
+        }).to.throw(Error);
+    })
+});
 
