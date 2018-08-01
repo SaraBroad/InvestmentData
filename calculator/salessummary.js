@@ -1,34 +1,43 @@
 var fs = require('fs');
-var csv = require('fast-csv');
+var csv = require('csvtojson')
+
+
 
 //parse Data.csv file
+// function readFile() {
 
+//     //first I tried this and I can get the 
+//     var stream = fs.createReadStream("../Data.csv")
+//     csv.fromStream(stream, { headers: ["txn_date", "txn_type", "txn_shares", "txn_price", "fund", "investor", "sales_rep"]})
+//         .on('data', function (data) {
+//             console.log(data);
+//             salesSummaryForBroker(data);
+//         })
+//         .on('end', function (data) {
+//             console.log("Read finished");
+//         });
+// }
 
 function readFile() {
 
-    //first I tried this and I can get the 
-    var stream = fs.createReadStream("../Data.csv")
-    csv.fromStream(stream, [{ headers: ["txn_date", "txn_type", "txn_shares", "txn_price", "fund", "investor", "sales_rep"]}])
-        .on('data', function (data) {
-            // console.log(data)
-            salesSummaryForBroker(data);
+    const csvFilePath = '../Data.csv'
+
+    csv()
+        .fromFile("../Data.csv")
+        .then((jsonObj) => {
+            console.log(jsonObj);
+            salesSummaryForBroker(jsonObj);
         })
-        .on('end', function (data) {
-            console.log("Read finished");
-        });
 }
 
-var salesSummaryForBroker = function (data, sales_rep) {
-    console.log(data);
-    var yearlyTotal = 0;
-    var monthTotal = 0;
-    var quarterTotal = 0;
-    var inceptionTotal = 0;
+// Async / await usage
+// const jsonArray=await csv().fromFile("../Data.csv");
 
-    if (data[6] === "John Q. Public") {
-            console.log("John's yearly total")
 
-    }
+
+var salesSummaryForBroker = function (jsonObj, sales_rep) {
+  
+//    console.log(sales_rep)
     return ""
 };
 
